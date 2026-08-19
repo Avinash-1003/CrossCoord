@@ -26,7 +26,7 @@ from agents.tier2_device_llm import Tier2DeviceLLM
 from agents.tier3_executor import Tier3Executor
 from modules.self_healing import SelfHealingCoordinator
 from modules.transfer_adaptation import TransferAdaptationModule
-from utils.mock_llm import MockLLM
+from utils.llm_client import CrossCoordLLM
 from utils.metrics import MetricsTracker
 
 
@@ -85,7 +85,7 @@ def run_mission(scenario, map_file, max_steps=500, failure_rate=0.02):
 
     # ─── Phase: Tier-1 Cloud LLM ──────────────────────────────────
     print("\n[Phase] Tier-1 Cloud LLM — Task Decomposition")
-    llm = MockLLM()
+    llm = CrossCoordLLM()
     planner = Tier1CloudLLM(llm)
     subtasks = planner.decompose_mission(f"Conduct {scenario.replace('_', ' ')} operations.")
     metrics.log_llm_call()

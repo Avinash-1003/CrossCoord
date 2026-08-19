@@ -22,7 +22,7 @@ from agents.tier3_executor import Tier3Executor
 from agents.q_learning_agent import QLearningAgent, train_agent_on_map
 from modules.self_healing import SelfHealingCoordinator
 from modules.transfer_adaptation import TransferAdaptationModule
-from utils.mock_llm import MockLLM
+from utils.llm_client import CrossCoordLLM
 from utils.metrics import MetricsTracker
 from utils.visualizer import Visualizer
 from utils.config import load_config, save_default_config
@@ -68,7 +68,7 @@ def run_benchmark_mission(scenario, map_file, max_steps=500, failure_rate=0.02,
     env = CrossCoordEnv(grid)
 
     # Tier-1
-    llm = MockLLM()
+    llm = CrossCoordLLM()
     planner = Tier1CloudLLM(llm)
     subtasks = planner.decompose_mission(f"Conduct {scenario.replace('_', ' ')} operations.")
     metrics.log_llm_call()
