@@ -53,18 +53,6 @@ def run_mission(scenario, map_file, max_steps=500, failure_rate=0.02):
     print("\n[Phase] Transfer/Adaptation Module")
     tam = TransferAdaptationModule()
 
-    # Register known domains (AutoHMA-LLM baseline)
-    tam.register_domain("logistics", {
-        "map_file": "datasets/logistics/Berlin_1_256.map",
-        "grid_size": (256, 256),
-        "obstacle_density": 0.15,
-    })
-    tam.register_domain("search_and_rescue", {
-        "map_file": "datasets/search_and_rescue/Boston_0_256.map",
-        "grid_size": (256, 256),
-        "obstacle_density": 0.25,
-    })
-
     # Transfer to target domain (possibly unseen)
     domain_config = {
         "map_file": map_file,

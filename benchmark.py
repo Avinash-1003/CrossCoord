@@ -46,15 +46,7 @@ def run_benchmark_mission(scenario, map_file, max_steps=500, failure_rate=0.02,
 
     # Transfer/Adaptation
     tam = TransferAdaptationModule()
-    tam.register_domain("logistics", {
-        "map_file": "datasets/logistics/Berlin_1_256.map",
-        "grid_size": (256, 256), "obstacle_density": 0.15,
-    })
-    tam.register_domain("search_and_rescue", {
-        "map_file": "datasets/search_and_rescue/Boston_0_256.map",
-        "grid_size": (256, 256), "obstacle_density": 0.25,
-    })
-
+    
     domain_config = {
         "map_file": map_file, "obstacle_density": 0.20,
         "hazards": ["flooding", "structural_collapse"],

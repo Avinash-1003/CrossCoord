@@ -1,0 +1,22 @@
+# Logistics Operational Protocols
+
+## Core Objective
+The primary objective in a warehouse logistics scenario is high-throughput, efficient item retrieval and transportation in a highly structured but dynamic environment.
+
+## Hazards
+- High-density traffic (other robots).
+- Narrow aisles and blocked paths from dropped items.
+- Dynamic human presence in mixed zones.
+- Wi-Fi dead zones deep within metal shelving.
+
+## Agent Roles
+- Inventory Scanning (UAV_Quad): Flies above the shelves to scan barcodes and update the central inventory database in real-time.
+- Heavy Payload Lifting (UAV_Heavy): Not typically used in indoor logistics due to rotor wash and size, but can be used for high-bay heavy lifts if necessary.
+- Rapid Courier (UGV_Scout): Fast-moving ground robot used for single-item express delivery across the warehouse floor.
+- Pallet Transport (UGV_Carrier): Heavy-duty automated guided vehicle (AGV) used to move entire pallets of goods from receiving docks to storage aisles.
+
+## Standard Operating Procedure (SOP)
+1. UAV_Quad conducts periodic sweeps to maintain inventory accuracy.
+2. Incoming orders trigger the dispatch of UGV_Carrier for pallet-level movement.
+3. Express or high-priority single items trigger UGV_Scout dispatch.
+4. Agents must adhere strictly to predefined traffic lanes to prevent deadlocks in narrow aisles.

@@ -1,0 +1,22 @@
+# Search and Rescue Operational Protocols
+
+## Core Objective
+The primary objective in a search and rescue (SAR) scenario is to locate human survivors in a complex, sprawling environment (such as a city block or wilderness area) and dispatch aid immediately.
+
+## Hazards
+- Extreme weather conditions limiting visibility.
+- Dense forests or urban structures blocking radio line-of-sight.
+- Moving hazards (e.g., spreading fires or rising water).
+- Time-critical constraints for survivor viability.
+
+## Agent Roles
+- High-Altitude Search (UAV_Quad): Employs thermal imaging and wide-angle cameras to scan massive areas rapidly and pinpoint heat signatures.
+- Rescue Payload Drops (UAV_Heavy): Delivers survival kits, life rafts, or medical supplies directly to identified survivors who are inaccessible by ground.
+- Ground Search (UGV_Scout): Navigates under tree canopies or inside collapsed structures where aerial view is obstructed to locate survivors.
+- Medical Transport (UGV_Carrier): Transports heavy medical evacuation equipment or extraction tools to the rescue site.
+
+## Standard Operating Procedure (SOP)
+1. Establish a grid search pattern and deploy UAV_Quad for rapid thermal scanning.
+2. If a heat signature is found under cover, dispatch UGV_Scout to investigate visually.
+3. Once a survivor is confirmed, dispatch UAV_Heavy immediately with a survival kit.
+4. Route the UGV_Carrier to the location with extraction tools to bring the survivor to safety.

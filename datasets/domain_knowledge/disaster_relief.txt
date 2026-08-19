@@ -1,0 +1,22 @@
+# Disaster Relief Operational Protocols
+
+## Core Objective
+The primary objective in a disaster relief scenario is rapid assessment and resource distribution in unpredictable, partially destroyed environments. Time is critical, and safety hazards are abundant.
+
+## Hazards
+- Structural collapses and unstable debris.
+- Flooding and waterlogged areas.
+- Downed power lines and electrical hazards.
+- Secondary structural failures (aftershocks).
+
+## Agent Roles
+- Aerial Reconnaissance (UAV_Quad): Maps the disaster zone rapidly from above, identifies passable routes through rubble.
+- Heavy Payload Delivery (UAV_Heavy): Drops critical medical supplies and communication relays into isolated zones.
+- Ground Pathfinding (UGV_Scout): Navigates dense rubble, identifies structural weaknesses, and marks safe paths for heavier vehicles.
+- Supply Transport (UGV_Carrier): Moves bulk supplies (food, water, heavy rescue equipment) along ground routes cleared by the UGV_Scout.
+
+## Standard Operating Procedure (SOP)
+1. Launch UAV_Quad for high-altitude mapping.
+2. Deploy UGV_Scout to test ground stability on identified routes.
+3. Once routes are cleared, dispatch UGV_Carrier with bulk supplies.
+4. For completely isolated zones, deploy UAV_Heavy for precision drops.

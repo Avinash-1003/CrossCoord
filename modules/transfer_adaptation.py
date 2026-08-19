@@ -1,165 +1,124 @@
+import os
 import json
-import copy
+import numpy as np
+import faiss
+from sentence_transformers import SentenceTransformer
 
 class TransferAdaptationModule:
     """
-    Transfer/Adaptation Module.
-
-    Separates domain-general coordination knowledge from domain-specific
-    knowledge, enabling zero-shot or few-shot transfer to unseen domains.
-
-    Domain-General Knowledge (frozen, reused):
-        - Task decomposition patterns (split complex missions into subtasks)
-        - Role assignment heuristics (match agent type to task type)
-        - Communication protocols (how tiers exchange messages)
-        - Failure-recovery procedures (self-healing workflow)
-
-    Domain-Specific Knowledge (retrained per domain):
-        - Map/environment layout and obstacle distribution
-        - Agent starting positions and safe zones
-        - Domain-specific task targets and success criteria
-        - Environmental hazards unique to the domain
+    RAG-based Transfer Adaptation Module.
+    Uses FAISS and SentenceTransformers to retrieve domain-specific
+    Standard Operating Procedures (SOPs) based on semantic search.
     """
+    def __init__(self, model_name='all-MiniLM-L6-v2'):
+        print("[Transfer/RAG] Initializing Embedding Model...")
+        self.encoder = SentenceTransformer(model_name)
+        self.dimension = self.encoder.get_sentence_embedding_dimension()
+        
+        # FAISS Index (L2 distance)
+        self.index = faiss.IndexFlatL2(self.dimension)
+        
+        self.documents = []
+        self.document_metadata = []
+        self.registered_domains = set()
+        
+        # Load local knowledge base
+        self._load_knowledge_base()
+        
+    def _load_knowledge_base(self):
+        kb_path = os.path.join(os.path.dirname(__file__), "..", "datasets", "domain_knowledge")
+        if not os.path.exists(kb_path):
+            print(f"[Transfer/RAG] Knowledge base path {kb_path} not found.")
+            return
 
-    def __init__(self):
-        # Domain-general knowledge store (shared across all domains)
-        self.general_knowledge = {
-            "decomposition_rules": [
-                "Split a mission into independent subtasks that can run in parallel.",
-                "Match each subtask type to the most capable agent type.",
-                "Prioritize safety-critical tasks (rescue > logistics > inspection).",
-            ],
-            "role_mapping": {
-                "Aerial_Reconnaissance": ["UAV_Quad", "UAV_Heavy"],
-                "Aerial_Logistics": ["UAV_Heavy"],
-                "Ground_Inspection": ["UGV_Scout"],
-                "Ground_Logistics": ["UGV_Carrier"],
-                "Environment_Monitoring": ["Static_Sensor"],
-            },
-            "communication_protocol": {
-                "tier1_to_tier2": "JSON subtask list",
-                "tier2_to_tier3": "Waypoint coordinates + task ID",
-                "tier3_to_tier2": "Status heartbeat (position, battery, task %)",
-            },
-            "recovery_protocol": {
-                "detection": "Heartbeat timeout > 3 consecutive misses",
-                "action": "Redistribute orphaned task via capability matching",
-                "fallback": "Escalate to Tier-1 for full replan if >50% agents fail",
-            },
-        }
+        for filename in os.listdir(kb_path):
+            if filename.endswith(".txt"):
+                domain = filename.replace(".txt", "")
+                filepath = os.path.join(kb_path, filename)
+                
+                with open(filepath, 'r') as f:
+                    content = f.read()
+                    
+                # Split by sections for finer retrieval
+                sections = content.split("## ")
+                for i, section in enumerate(sections):
+                    if not section.strip():
+                        continue
+                    text = "## " + section if i > 0 else section
+                    self._add_document(text.strip(), {"domain": domain, "section_id": i})
+                    
+                self.registered_domains.add(domain)
+                print(f"[Transfer/RAG] Indexed domain knowledge: '{domain}'")
 
-        # Domain-specific adapter stores (one per domain)
-        self.domain_adapters = {}
+    def _add_document(self, text, metadata):
+        embedding = self.encoder.encode([text])
+        faiss.normalize_L2(embedding)
+        self.index.add(embedding)
+        self.documents.append(text)
+        self.document_metadata.append(metadata)
 
-        # Metrics
-        self.transfer_log = []
-
-    def register_domain(self, domain_name, domain_config):
+    def retrieve_context(self, query, k=3):
         """
-        Register a new domain-specific adapter.
-        :param domain_name: e.g., "logistics", "search_and_rescue", "disaster_relief"
-        :param domain_config: Dict with domain-specific parameters.
+        Semantic search for the top-k most relevant SOP sections.
         """
-        self.domain_adapters[domain_name] = {
-            "name": domain_name,
-            "map_file": domain_config.get("map_file", ""),
-            "grid_size": domain_config.get("grid_size", (0, 0)),
-            "obstacle_density": domain_config.get("obstacle_density", 0.0),
-            "agent_start_positions": domain_config.get("agent_start_positions", {}),
-            "task_targets": domain_config.get("task_targets", []),
-            "hazards": domain_config.get("hazards", []),
-            "success_criteria": domain_config.get("success_criteria", "All tasks completed"),
-        }
-        print(f"[Transfer] Registered domain adapter: '{domain_name}'")
+        if self.index.ntotal == 0:
+            return "No domain knowledge available."
+            
+        query_emb = self.encoder.encode([query])
+        faiss.normalize_L2(query_emb)
+        
+        distances, indices = self.index.search(query_emb, k)
+        
+        retrieved = []
+        for idx in indices[0]:
+            if idx != -1:
+                meta = self.document_metadata[idx]
+                doc = self.documents[idx]
+                retrieved.append(f"[{meta['domain'].upper()}] {doc}")
+                
+        return "\n\n".join(retrieved)
 
-    def transfer_to_domain(self, target_domain_name, target_domain_config=None):
+    def transfer_to_domain(self, target_domain, config):
         """
-        Prepare to operate in a new (potentially unseen) domain.
-
-        If we have a pre-trained adapter for this domain, use it directly.
-        If not, create a minimal adapter from the config (zero-shot transfer)
-        by reusing all domain-general knowledge and only adapting the
-        domain-specific layer.
-
-        :returns: Combined knowledge bundle for this domain.
+        Constructs the Prompt/Bundle for the LLM using RAG.
+        If the domain is unseen, it retrieves the most semantically similar
+        knowledge from known domains (Zero-Shot Transfer).
         """
-        if target_domain_name in self.domain_adapters:
-            print(f"[Transfer] ✅ Known domain '{target_domain_name}' — using existing adapter.")
-            adapter = self.domain_adapters[target_domain_name]
-            transfer_type = "known"
-        elif target_domain_config:
-            print(f"[Transfer] 🔄 Unseen domain '{target_domain_name}' — creating zero-shot adapter.")
-            self.register_domain(target_domain_name, target_domain_config)
-            adapter = self.domain_adapters[target_domain_name]
-            transfer_type = "zero_shot"
+        query = f"Operational protocols, hazards, and agent roles for {target_domain.replace('_', ' ')}."
+        
+        if target_domain in self.registered_domains:
+            print(f"[Transfer/RAG] ✅ Known domain '{target_domain}'. Retrieving direct SOPs.")
+            transfer_type = "known_domain"
         else:
-            print(f"[Transfer] ❌ Unknown domain '{target_domain_name}' and no config provided.")
-            return None
+            print(f"[Transfer/RAG] 🔄 Unseen domain '{target_domain}'. Performing semantic retrieval for Zero-Shot Transfer.")
+            transfer_type = "zero_shot"
 
-        # Build the combined knowledge bundle
+        context = self.retrieve_context(query, k=2)
+        
         bundle = {
-            "general": copy.deepcopy(self.general_knowledge),
-            "specific": copy.deepcopy(adapter),
+            "domain": target_domain,
             "transfer_type": transfer_type,
+            "retrieved_context": context,
+            "config": config
         }
-
-        self.transfer_log.append({
-            "domain": target_domain_name,
-            "transfer_type": transfer_type,
-            "general_rules_count": len(self.general_knowledge["decomposition_rules"]),
-            "specific_params_count": len(adapter),
-        })
-
         return bundle
 
-    def get_role_for_task(self, task_type):
-        """
-        Use domain-general role mapping to find suitable agent types for a task.
-        """
-        return self.general_knowledge["role_mapping"].get(task_type, [])
-
     def get_metrics(self):
-        """Return transfer/adaptation performance metrics."""
-        known_transfers = sum(1 for t in self.transfer_log if t["transfer_type"] == "known")
-        zero_shot_transfers = sum(1 for t in self.transfer_log if t["transfer_type"] == "zero_shot")
         return {
-            "total_transfers": len(self.transfer_log),
-            "known_domain_transfers": known_transfers,
-            "zero_shot_transfers": zero_shot_transfers,
-            "registered_domains": list(self.domain_adapters.keys()),
-            "transfer_log": self.transfer_log,
+            "total_documents": len(self.documents),
+            "registered_domains": list(self.registered_domains)
         }
 
-
 if __name__ == "__main__":
+    # Test the RAG module
     tam = TransferAdaptationModule()
-
-    # Register known domains (the 3 from AutoHMA-LLM)
-    tam.register_domain("logistics", {
-        "map_file": "datasets/logistics/Berlin_1_256.map",
-        "grid_size": (256, 256),
-        "obstacle_density": 0.15,
-        "task_targets": [(15, 20), (5, 5)],
-    })
-    tam.register_domain("search_and_rescue", {
-        "map_file": "datasets/search_and_rescue/Boston_0_256.map",
-        "grid_size": (256, 256),
-        "obstacle_density": 0.25,
-        "task_targets": [(50, 50), (100, 100)],
-    })
-
-    # Transfer to a known domain
-    bundle_known = tam.transfer_to_domain("logistics")
-    print(f"  Transfer type: {bundle_known['transfer_type']}")
-
-    # Transfer to an UNSEEN domain (zero-shot)
-    bundle_new = tam.transfer_to_domain("disaster_relief", {
-        "map_file": "datasets/disaster_relief/random-32-32-20.map",
-        "grid_size": (32, 32),
-        "obstacle_density": 0.20,
-        "task_targets": [(31, 31), (10, 10)],
-        "hazards": ["flooding", "structural_collapse"],
-    })
-    print(f"  Transfer type: {bundle_new['transfer_type']}")
-
-    print("\nMetrics:", json.dumps(tam.get_metrics(), indent=2))
+    
+    # Test known domain
+    bundle1 = tam.transfer_to_domain("logistics", {})
+    print("\n--- Logistics Retrieval ---")
+    print(bundle1["retrieved_context"][:300] + "...")
+    
+    # Test zero-shot transfer for a completely new domain
+    bundle2 = tam.transfer_to_domain("underwater_construction", {})
+    print("\n--- Zero-Shot Retrieval (Underwater Construction) ---")
+    print(bundle2["retrieved_context"][:300] + "...")
