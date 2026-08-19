@@ -1,0 +1,100 @@
+{
+  "mission_duration_sec": 0.0867,
+  "total_simulation_steps": 184,
+  "task_accuracy": {
+    "assigned": 2,
+    "completed": 0,
+    "accuracy_pct": 0.0
+  },
+  "communication_overhead": {
+    "total_llm_calls": 6
+  },
+  "per_agent_steps": {
+    "A_005": 34,
+    "A_006": 120,
+    "A_004": 30
+  },
+  "self_healing": {
+    "total_failures": 4,
+    "total_recoveries": 2,
+    "successful_recoveries": 2,
+    "avg_recovery_time_ms": 11.594891548156738,
+    "failure_log": [
+      {
+        "agent_id": "A_003",
+        "step": 27,
+        "timestamp": 1787161474.517708,
+        "remaining_path_length": 0,
+        "position_at_failure": [
+          252,
+          133
+        ]
+      },
+      {
+        "agent_id": "A_005",
+        "step": 35,
+        "timestamp": 1787161474.517746,
+        "remaining_path_length": 200,
+        "position_at_failure": [
+          81,
+          128
+        ]
+      },
+      {
+        "agent_id": "A_004",
+        "step": 65,
+        "timestamp": 1787161474.539079,
+        "remaining_path_length": 225,
+        "position_at_failure": [
+          101,
+          133
+        ]
+      },
+      {
+        "agent_id": "A_006",
+        "step": 121,
+        "timestamp": 1787161474.5411708,
+        "remaining_path_length": 175,
+        "position_at_failure": [
+          112,
+          72
+        ]
+      }
+    ],
+    "recovery_log": [
+      {
+        "orphaned_task": "task_2",
+        "original_agent": null,
+        "reassigned_to": "A_004",
+        "path_found": true,
+        "recovery_time_ms": 21.205902099609375,
+        "new_path_length": 255
+      },
+      {
+        "orphaned_task": "task_2",
+        "original_agent": null,
+        "reassigned_to": "A_006",
+        "path_found": true,
+        "recovery_time_ms": 1.9838809967041016,
+        "new_path_length": 231
+      }
+    ]
+  },
+  "transfer_adaptation": {
+    "total_transfers": 1,
+    "known_domain_transfers": 1,
+    "zero_shot_transfers": 0,
+    "registered_domains": [
+      "logistics",
+      "search_and_rescue"
+    ],
+    "transfer_log": [
+      {
+        "domain": "logistics",
+        "transfer_type": "known",
+        "general_rules_count": 3,
+        "specific_params_count": 8
+      }
+    ]
+  }
+}

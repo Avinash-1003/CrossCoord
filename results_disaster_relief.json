@@ -1,0 +1,101 @@
+{
+  "mission_duration_sec": 0.0037,
+  "total_simulation_steps": 35,
+  "task_accuracy": {
+    "assigned": 2,
+    "completed": 1,
+    "accuracy_pct": 50.0
+  },
+  "communication_overhead": {
+    "total_llm_calls": 5
+  },
+  "per_agent_steps": {
+    "A_003": 16,
+    "A_006": 3,
+    "A_005": 16
+  },
+  "self_healing": {
+    "total_failures": 4,
+    "total_recoveries": 2,
+    "successful_recoveries": 2,
+    "avg_recovery_time_ms": 0.5879402160644531,
+    "failure_log": [
+      {
+        "agent_id": "A_004",
+        "step": 4,
+        "timestamp": 1787161474.4526532,
+        "remaining_path_length": 0,
+        "position_at_failure": [
+          23,
+          7
+        ]
+      },
+      {
+        "agent_id": "A_006",
+        "step": 4,
+        "timestamp": 1787161474.452658,
+        "remaining_path_length": 12,
+        "position_at_failure": [
+          17,
+          7
+        ]
+      },
+      {
+        "agent_id": "A_003",
+        "step": 17,
+        "timestamp": 1787161474.452702,
+        "remaining_path_length": 16,
+        "position_at_failure": [
+          24,
+          22
+        ]
+      },
+      {
+        "agent_id": "A_005",
+        "step": 33,
+        "timestamp": 1787161474.4539142,
+        "remaining_path_length": 26,
+        "position_at_failure": [
+          16,
+          20
+        ]
+      }
+    ],
+    "recovery_log": [
+      {
+        "orphaned_task": "task_2",
+        "original_agent": null,
+        "reassigned_to": "A_005",
+        "path_found": true,
+        "recovery_time_ms": 0.0040531158447265625,
+        "new_path_length": 0
+      },
+      {
+        "orphaned_task": "task_1",
+        "original_agent": null,
+        "reassigned_to": "A_005",
+        "path_found": true,
+        "recovery_time_ms": 1.1718273162841797,
+        "new_path_length": 42
+      }
+    ]
+  },
+  "transfer_adaptation": {
+    "total_transfers": 1,
+    "known_domain_transfers": 0,
+    "zero_shot_transfers": 1,
+    "registered_domains": [
+      "logistics",
+      "search_and_rescue",
+      "disaster_relief"
+    ],
+    "transfer_log": [
+      {
+        "domain": "disaster_relief",
+        "transfer_type": "zero_shot",
+        "general_rules_count": 3,
+        "specific_params_count": 8
+      }
+    ]
+  }
+}

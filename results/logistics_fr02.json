@@ -1,0 +1,109 @@
+{
+  "mission_duration_sec": 0.8816,
+  "total_simulation_steps": 88,
+  "task_accuracy": {
+    "assigned": 2,
+    "completed": 0,
+    "accuracy_pct": 0.0
+  },
+  "communication_overhead": {
+    "total_llm_calls": 6
+  },
+  "per_agent_steps": {
+    "A_005": 31,
+    "A_006": 4,
+    "A_003": 41,
+    "A_004": 12
+  },
+  "self_healing": {
+    "total_failures": 4,
+    "total_recoveries": 3,
+    "successful_recoveries": 3,
+    "avg_recovery_time_ms": 9.963274002075195,
+    "failure_log": [
+      {
+        "agent_id": "A_006",
+        "step": 5,
+        "timestamp": 1787161497.235422,
+        "remaining_path_length": 269,
+        "position_at_failure": [
+          "201",
+          "102"
+        ]
+      },
+      {
+        "agent_id": "A_005",
+        "step": 32,
+        "timestamp": 1787161497.2494562,
+        "remaining_path_length": 435,
+        "position_at_failure": [
+          "220",
+          "224"
+        ]
+      },
+      {
+        "agent_id": "A_004",
+        "step": 44,
+        "timestamp": 1787161497.257935,
+        "remaining_path_length": 263,
+        "position_at_failure": [
+          "120",
+          "152"
+        ]
+      },
+      {
+        "agent_id": "A_003",
+        "step": 46,
+        "timestamp": 1787161497.2655911,
+        "remaining_path_length": 217,
+        "position_at_failure": [
+          "87",
+          "139"
+        ]
+      }
+    ],
+    "recovery_log": [
+      {
+        "orphaned_task": "task_1",
+        "original_agent": null,
+        "reassigned_to": "A_003",
+        "path_found": true,
+        "recovery_time_ms": 13.85498046875,
+        "new_path_length": 233
+      },
+      {
+        "orphaned_task": "task_2",
+        "original_agent": null,
+        "reassigned_to": "A_004",
+        "path_found": true,
+        "recovery_time_ms": 8.416891098022461,
+        "new_path_length": 275
+      },
+      {
+        "orphaned_task": "task_2",
+        "original_agent": null,
+        "reassigned_to": "A_003",
+        "path_found": true,
+        "recovery_time_ms": 7.617950439453125,
+        "new_path_length": 219
+      }
+    ]
+  },
+  "transfer_adaptation": {
+    "total_transfers": 1,
+    "known_domain_transfers": 1,
+    "zero_shot_transfers": 0,
+    "registered_domains": [
+      "logistics",
+      "search_and_rescue"
+    ],
+    "transfer_log": [
+      {
+        "domain": "logistics",
+        "transfer_type": "known",
+        "general_rules_count": 3,
+        "specific_params_count": 8
+      }
+    ]
+  }
+}

@@ -1,0 +1,34 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Models (large binary files)
+models/*.pkl
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Node (from PPT generation attempts)
+node_modules/
+package-lock.json
+package.json
+
+# Generated PPT script artifacts
+*.pptx
+!CrossCoord_Review1_Presentation.pptx
+
+# Temporary
+*.tmp
+*.log

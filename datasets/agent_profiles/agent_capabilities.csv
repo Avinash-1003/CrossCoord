@@ -1,0 +1,8 @@
+agent_id,type,tier,capability,battery_life_mins,payload_capacity_kg,communication_range_m,failure_probability
+A_001,Cloud_LLM,Tier_1,Central_Planning,N/A,N/A,Global,0.01
+A_002,Device_LLM_Base,Tier_2,Local_Dispatch,1440,N/A,5000,0.05
+A_003,UAV_Quad,Tier_3,Aerial_Reconnaissance,45,2.5,2000,0.15
+A_004,UAV_Heavy,Tier_3,Aerial_Logistics,30,15.0,2000,0.12
+A_005,UGV_Scout,Tier_3,Ground_Inspection,180,5.0,1500,0.10
+A_006,UGV_Carrier,Tier_3,Ground_Logistics,240,50.0,1500,0.08
+A_007,Static_Sensor,Tier_3,Environment_Monitoring,8760,0.0,500,0.02

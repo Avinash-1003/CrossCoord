@@ -1,0 +1,42 @@
+{
+  "mission_duration_sec": 0.24,
+  "total_simulation_steps": 22,
+  "task_accuracy": {
+    "assigned": 2,
+    "completed": 2,
+    "accuracy_pct": 100.0
+  },
+  "communication_overhead": {
+    "total_llm_calls": 2
+  },
+  "per_agent_steps": {
+    "A_003": 6,
+    "A_006": 16
+  },
+  "self_healing": {
+    "total_failures": 0,
+    "total_recoveries": 0,
+    "successful_recoveries": 0,
+    "avg_recovery_time_ms": 0,
+    "failure_log": [],
+    "recovery_log": []
+  },
+  "transfer_adaptation": {
+    "total_transfers": 1,
+    "known_domain_transfers": 0,
+    "zero_shot_transfers": 1,
+    "registered_domains": [
+      "logistics",
+      "search_and_rescue",
+      "disaster_relief"
+    ],
+    "transfer_log": [
+      {
+        "domain": "disaster_relief",
+        "transfer_type": "zero_shot",
+        "general_rules_count": 3,
+        "specific_params_count": 8
+      }
+    ]
+  }
+}
