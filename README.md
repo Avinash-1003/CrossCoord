@@ -106,9 +106,9 @@ pip install numpy matplotlib pyyaml
 
 ## Authors
 
-- *Avinash G, 160123737106
-Sandeep M, 160123737123
-Manish N, 160123737127*
+- *Avinash G (160123737106),*
+- *Sandeep M (160123737123),*
+- *Manish N (160123737127)*
 - Department of IT, CBIT
 - Under the guidance of *Mr. Geedikanti Srikanth
 Assistant Professor, IT, CBIT*
