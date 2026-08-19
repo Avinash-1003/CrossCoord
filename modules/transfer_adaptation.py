@@ -22,6 +22,12 @@ class TransferAdaptationModule:
         self.document_metadata = []
         self.registered_domains = set()
         
+        self.stats = {
+            "total_transfers": 0,
+            "known_domain": 0,
+            "zero_shot": 0
+        }
+        
         # Load local knowledge base
         self._load_knowledge_base()
         
@@ -84,14 +90,17 @@ class TransferAdaptationModule:
         If the domain is unseen, it retrieves the most semantically similar
         knowledge from known domains (Zero-Shot Transfer).
         """
+        self.stats["total_transfers"] += 1
         query = f"Operational protocols, hazards, and agent roles for {target_domain.replace('_', ' ')}."
         
         if target_domain in self.registered_domains:
             print(f"[Transfer/RAG] ✅ Known domain '{target_domain}'. Retrieving direct SOPs.")
             transfer_type = "known_domain"
+            self.stats["known_domain"] += 1
         else:
             print(f"[Transfer/RAG] 🔄 Unseen domain '{target_domain}'. Performing semantic retrieval for Zero-Shot Transfer.")
             transfer_type = "zero_shot"
+            self.stats["zero_shot"] += 1
 
         context = self.retrieve_context(query, k=2)
         
@@ -105,8 +114,11 @@ class TransferAdaptationModule:
 
     def get_metrics(self):
         return {
-            "total_documents": len(self.documents),
-            "registered_domains": list(self.registered_domains)
+            "total_transfers": self.stats["total_transfers"],
+            "known_domain": self.stats["known_domain"],
+            "zero_shot": self.stats["zero_shot"],
+            "registered_domains": list(self.registered_domains),
+            "total_documents": len(self.documents)
         }
 
 if __name__ == "__main__":

@@ -1,42 +1,46 @@
 {
-  "mission_duration_sec": 0.24,
-  "total_simulation_steps": 22,
+  "mission_duration_sec": 6.2663,
+  "total_simulation_steps": 32,
   "task_accuracy": {
     "assigned": 2,
     "completed": 2,
     "accuracy_pct": 100.0
   },
   "communication_overhead": {
-    "total_llm_calls": 2
+    "total_llm_calls": 3
   },
   "per_agent_steps": {
     "A_003": 6,
-    "A_006": 16
+    "A_006": 26
   },
   "self_healing": {
-    "total_failures": 0,
+    "total_failures": 1,
     "total_recoveries": 0,
     "successful_recoveries": 0,
     "avg_recovery_time_ms": 0,
-    "failure_log": [],
+    "failure_log": [
+      {
+        "agent_id": "A_004",
+        "step": 21,
+        "timestamp": 1787163181.548935,
+        "remaining_path_length": 0,
+        "position_at_failure": [
+          "31",
+          "9"
+        ]
+      }
+    ],
     "recovery_log": []
   },
   "transfer_adaptation": {
     "total_transfers": 1,
-    "known_domain_transfers": 0,
-    "zero_shot_transfers": 1,
+    "known_domain": 1,
+    "zero_shot": 0,
     "registered_domains": [
-      "logistics",
       "search_and_rescue",
-      "disaster_relief"
+      "disaster_relief",
+      "logistics"
     ],
-    "transfer_log": [
-      {
-        "domain": "disaster_relief",
-        "transfer_type": "zero_shot",
-        "general_rules_count": 3,
-        "specific_params_count": 8
-      }
-    ]
+    "total_documents": 15
   }
 }

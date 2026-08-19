@@ -1,5 +1,5 @@
 {
-  "mission_duration_sec": 0.8762,
+  "mission_duration_sec": 6.6753,
   "total_simulation_steps": 14,
   "task_accuracy": {
     "assigned": 2,
@@ -18,12 +18,12 @@
     "total_failures": 4,
     "total_recoveries": 2,
     "successful_recoveries": 2,
-    "avg_recovery_time_ms": 16.944408416748047,
+    "avg_recovery_time_ms": 17.273545265197754,
     "failure_log": [
       {
         "agent_id": "A_004",
         "step": 1,
-        "timestamp": 1787161498.1025732,
+        "timestamp": 1787163208.233224,
         "remaining_path_length": 0,
         "position_at_failure": [
           "129",
@@ -33,7 +33,7 @@
       {
         "agent_id": "A_006",
         "step": 3,
-        "timestamp": 1787161498.102596,
+        "timestamp": 1787163208.233258,
         "remaining_path_length": 271,
         "position_at_failure": [
           "202",
@@ -43,7 +43,7 @@
       {
         "agent_id": "A_003",
         "step": 5,
-        "timestamp": 1787161498.1155899,
+        "timestamp": 1787163208.247139,
         "remaining_path_length": 231,
         "position_at_failure": [
           "122",
@@ -53,7 +53,7 @@
       {
         "agent_id": "A_005",
         "step": 11,
-        "timestamp": 1787161498.136567,
+        "timestamp": 1787163208.267885,
         "remaining_path_length": 431,
         "position_at_failure": [
           "238",
@@ -67,7 +67,7 @@
         "original_agent": null,
         "reassigned_to": "A_003",
         "path_found": true,
-        "recovery_time_ms": 12.953758239746094,
+        "recovery_time_ms": 13.846158981323242,
         "new_path_length": 233
       },
       {
@@ -75,26 +75,20 @@
         "original_agent": null,
         "reassigned_to": "A_005",
         "path_found": true,
-        "recovery_time_ms": 20.93505859375,
+        "recovery_time_ms": 20.700931549072266,
         "new_path_length": 437
       }
     ]
   },
   "transfer_adaptation": {
     "total_transfers": 1,
-    "known_domain_transfers": 1,
-    "zero_shot_transfers": 0,
+    "known_domain": 1,
+    "zero_shot": 0,
     "registered_domains": [
-      "logistics",
-      "search_and_rescue"
+      "search_and_rescue",
+      "disaster_relief",
+      "logistics"
     ],
-    "transfer_log": [
-      {
-        "domain": "logistics",
-        "transfer_type": "known",
-        "general_rules_count": 3,
-        "specific_params_count": 8
-      }
-    ]
+    "total_documents": 15
   }
 }

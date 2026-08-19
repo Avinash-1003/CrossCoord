@@ -1,5 +1,5 @@
 {
-  "mission_duration_sec": 0.8298,
+  "mission_duration_sec": 6.8744,
   "total_simulation_steps": 88,
   "task_accuracy": {
     "assigned": 2,
@@ -17,12 +17,12 @@
     "total_failures": 4,
     "total_recoveries": 1,
     "successful_recoveries": 1,
-    "avg_recovery_time_ms": 0.25081634521484375,
+    "avg_recovery_time_ms": 0.244140625,
     "failure_log": [
       {
         "agent_id": "A_006",
         "step": 5,
-        "timestamp": 1787161499.7395048,
+        "timestamp": 1787163222.339591,
         "remaining_path_length": 0,
         "position_at_failure": [
           "31",
@@ -32,7 +32,7 @@
       {
         "agent_id": "A_005",
         "step": 32,
-        "timestamp": 1787161499.739594,
+        "timestamp": 1787163222.339691,
         "remaining_path_length": 0,
         "position_at_failure": [
           "220",
@@ -42,7 +42,7 @@
       {
         "agent_id": "A_004",
         "step": 44,
-        "timestamp": 1787161499.7396328,
+        "timestamp": 1787163222.33973,
         "remaining_path_length": 227,
         "position_at_failure": [
           "209",
@@ -52,7 +52,7 @@
       {
         "agent_id": "A_003",
         "step": 46,
-        "timestamp": 1787161499.739903,
+        "timestamp": 1787163222.3399968,
         "remaining_path_length": 18,
         "position_at_failure": [
           "44",
@@ -66,26 +66,20 @@
         "original_agent": null,
         "reassigned_to": "A_003",
         "path_found": true,
-        "recovery_time_ms": 0.25081634521484375,
+        "recovery_time_ms": 0.244140625,
         "new_path_length": 20
       }
     ]
   },
   "transfer_adaptation": {
     "total_transfers": 1,
-    "known_domain_transfers": 1,
-    "zero_shot_transfers": 0,
+    "known_domain": 1,
+    "zero_shot": 0,
     "registered_domains": [
-      "logistics",
-      "search_and_rescue"
+      "search_and_rescue",
+      "disaster_relief",
+      "logistics"
     ],
-    "transfer_log": [
-      {
-        "domain": "search_and_rescue",
-        "transfer_type": "known",
-        "general_rules_count": 3,
-        "specific_params_count": 8
-      }
-    ]
+    "total_documents": 15
   }
 }

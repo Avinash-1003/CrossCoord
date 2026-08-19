@@ -1,7 +1,7 @@
 {
   "disaster_relief_fr00": {
-    "mission_duration_sec": 0.2525,
-    "total_simulation_steps": 22,
+    "mission_duration_sec": 6.8728,
+    "total_simulation_steps": 32,
     "task_accuracy": {
       "assigned": 2,
       "completed": 2,
@@ -12,7 +12,7 @@
     },
     "per_agent_steps": {
       "A_003": 6,
-      "A_006": 16
+      "A_006": 26
     },
     "self_healing": {
       "total_failures": 0,
@@ -24,168 +24,129 @@
     },
     "transfer_adaptation": {
       "total_transfers": 1,
-      "known_domain_transfers": 0,
-      "zero_shot_transfers": 1,
+      "known_domain": 1,
+      "zero_shot": 0,
       "registered_domains": [
-        "logistics",
         "search_and_rescue",
-        "disaster_relief"
+        "disaster_relief",
+        "logistics"
       ],
-      "transfer_log": [
-        {
-          "domain": "disaster_relief",
-          "transfer_type": "zero_shot",
-          "general_rules_count": 3,
-          "specific_params_count": 8
-        }
-      ]
+      "total_documents": 15
     }
   },
   "disaster_relief_fr02": {
-    "mission_duration_sec": 0.24,
-    "total_simulation_steps": 22,
+    "mission_duration_sec": 6.2663,
+    "total_simulation_steps": 32,
     "task_accuracy": {
       "assigned": 2,
       "completed": 2,
       "accuracy_pct": 100.0
     },
     "communication_overhead": {
-      "total_llm_calls": 2
+      "total_llm_calls": 3
     },
     "per_agent_steps": {
       "A_003": 6,
-      "A_006": 16
+      "A_006": 26
     },
     "self_healing": {
-      "total_failures": 0,
+      "total_failures": 1,
       "total_recoveries": 0,
       "successful_recoveries": 0,
       "avg_recovery_time_ms": 0,
-      "failure_log": [],
+      "failure_log": [
+        {
+          "agent_id": "A_004",
+          "step": 21,
+          "timestamp": 1787163181.548935,
+          "remaining_path_length": 0,
+          "position_at_failure": [
+            "31",
+            "9"
+          ]
+        }
+      ],
       "recovery_log": []
     },
     "transfer_adaptation": {
       "total_transfers": 1,
-      "known_domain_transfers": 0,
-      "zero_shot_transfers": 1,
+      "known_domain": 1,
+      "zero_shot": 0,
       "registered_domains": [
-        "logistics",
         "search_and_rescue",
-        "disaster_relief"
+        "disaster_relief",
+        "logistics"
       ],
-      "transfer_log": [
-        {
-          "domain": "disaster_relief",
-          "transfer_type": "zero_shot",
-          "general_rules_count": 3,
-          "specific_params_count": 8
-        }
-      ]
+      "total_documents": 15
     }
   },
   "disaster_relief_fr05": {
-    "mission_duration_sec": 0.3413,
-    "total_simulation_steps": 50,
+    "mission_duration_sec": 6.6359,
+    "total_simulation_steps": 34,
     "task_accuracy": {
       "assigned": 2,
-      "completed": 1,
-      "accuracy_pct": 50.0
+      "completed": 2,
+      "accuracy_pct": 100.0
     },
     "communication_overhead": {
-      "total_llm_calls": 6
+      "total_llm_calls": 4
     },
     "per_agent_steps": {
-      "A_003": 5,
-      "A_006": 26,
-      "A_004": 19
+      "A_003": 6,
+      "A_004": 28
     },
     "self_healing": {
-      "total_failures": 4,
-      "total_recoveries": 2,
-      "successful_recoveries": 2,
-      "avg_recovery_time_ms": 1.1420249938964844,
+      "total_failures": 2,
+      "total_recoveries": 1,
+      "successful_recoveries": 1,
+      "avg_recovery_time_ms": 0.39196014404296875,
       "failure_log": [
         {
-          "agent_id": "A_003",
-          "step": 6,
-          "timestamp": 1787161495.815507,
-          "remaining_path_length": 1,
+          "agent_id": "A_006",
+          "step": 1,
+          "timestamp": 1787163187.985803,
+          "remaining_path_length": 26,
           "position_at_failure": [
-            "30",
-            "31"
+            "21",
+            "7"
           ]
         },
         {
           "agent_id": "A_005",
-          "step": 14,
-          "timestamp": 1787161495.816631,
+          "step": 27,
+          "timestamp": 1787163187.9862819,
           "remaining_path_length": 0,
           "position_at_failure": [
             "2",
             "22"
           ]
-        },
-        {
-          "agent_id": "A_004",
-          "step": 25,
-          "timestamp": 1787161495.81666,
-          "remaining_path_length": 31,
-          "position_at_failure": [
-            "21",
-            "14"
-          ]
-        },
-        {
-          "agent_id": "A_006",
-          "step": 35,
-          "timestamp": 1787161495.8179,
-          "remaining_path_length": 32,
-          "position_at_failure": [
-            "11",
-            "19"
-          ]
         }
       ],
       "recovery_log": [
         {
-          "orphaned_task": "task_1",
+          "orphaned_task": "task_2",
           "original_agent": null,
           "reassigned_to": "A_004",
           "path_found": true,
-          "recovery_time_ms": 1.071929931640625,
-          "new_path_length": 50
-        },
-        {
-          "orphaned_task": "task_1",
-          "original_agent": null,
-          "reassigned_to": "A_006",
-          "path_found": true,
-          "recovery_time_ms": 1.2121200561523438,
-          "new_path_length": 42
+          "recovery_time_ms": 0.39196014404296875,
+          "new_path_length": 28
         }
       ]
     },
     "transfer_adaptation": {
       "total_transfers": 1,
-      "known_domain_transfers": 0,
-      "zero_shot_transfers": 1,
+      "known_domain": 1,
+      "zero_shot": 0,
       "registered_domains": [
-        "logistics",
         "search_and_rescue",
-        "disaster_relief"
+        "disaster_relief",
+        "logistics"
       ],
-      "transfer_log": [
-        {
-          "domain": "disaster_relief",
-          "transfer_type": "zero_shot",
-          "general_rules_count": 3,
-          "specific_params_count": 8
-        }
-      ]
+      "total_documents": 15
     }
   },
   "logistics_fr00": {
-    "mission_duration_sec": 0.7926,
+    "mission_duration_sec": 6.9177,
     "total_simulation_steps": 739,
     "task_accuracy": {
       "assigned": 2,
@@ -209,24 +170,18 @@
     },
     "transfer_adaptation": {
       "total_transfers": 1,
-      "known_domain_transfers": 1,
-      "zero_shot_transfers": 0,
+      "known_domain": 1,
+      "zero_shot": 0,
       "registered_domains": [
-        "logistics",
-        "search_and_rescue"
+        "search_and_rescue",
+        "disaster_relief",
+        "logistics"
       ],
-      "transfer_log": [
-        {
-          "domain": "logistics",
-          "transfer_type": "known",
-          "general_rules_count": 3,
-          "specific_params_count": 8
-        }
-      ]
+      "total_documents": 15
     }
   },
   "logistics_fr02": {
-    "mission_duration_sec": 0.8816,
+    "mission_duration_sec": 6.7497,
     "total_simulation_steps": 88,
     "task_accuracy": {
       "assigned": 2,
@@ -246,12 +201,12 @@
       "total_failures": 4,
       "total_recoveries": 3,
       "successful_recoveries": 3,
-      "avg_recovery_time_ms": 9.963274002075195,
+      "avg_recovery_time_ms": 9.714365005493164,
       "failure_log": [
         {
           "agent_id": "A_006",
           "step": 5,
-          "timestamp": 1787161497.235422,
+          "timestamp": 1787163201.49107,
           "remaining_path_length": 269,
           "position_at_failure": [
             "201",
@@ -261,7 +216,7 @@
         {
           "agent_id": "A_005",
           "step": 32,
-          "timestamp": 1787161497.2494562,
+          "timestamp": 1787163201.503981,
           "remaining_path_length": 435,
           "position_at_failure": [
             "220",
@@ -271,7 +226,7 @@
         {
           "agent_id": "A_004",
           "step": 44,
-          "timestamp": 1787161497.257935,
+          "timestamp": 1787163201.512179,
           "remaining_path_length": 263,
           "position_at_failure": [
             "120",
@@ -281,7 +236,7 @@
         {
           "agent_id": "A_003",
           "step": 46,
-          "timestamp": 1787161497.2655911,
+          "timestamp": 1787163201.520443,
           "remaining_path_length": 217,
           "position_at_failure": [
             "87",
@@ -295,7 +250,7 @@
           "original_agent": null,
           "reassigned_to": "A_003",
           "path_found": true,
-          "recovery_time_ms": 13.85498046875,
+          "recovery_time_ms": 12.77780532836914,
           "new_path_length": 233
         },
         {
@@ -303,7 +258,7 @@
           "original_agent": null,
           "reassigned_to": "A_004",
           "path_found": true,
-          "recovery_time_ms": 8.416891098022461,
+          "recovery_time_ms": 8.131265640258789,
           "new_path_length": 275
         },
         {
@@ -311,31 +266,25 @@
           "original_agent": null,
           "reassigned_to": "A_003",
           "path_found": true,
-          "recovery_time_ms": 7.617950439453125,
+          "recovery_time_ms": 8.234024047851562,
           "new_path_length": 219
         }
       ]
     },
     "transfer_adaptation": {
       "total_transfers": 1,
-      "known_domain_transfers": 1,
-      "zero_shot_transfers": 0,
+      "known_domain": 1,
+      "zero_shot": 0,
       "registered_domains": [
-        "logistics",
-        "search_and_rescue"
+        "search_and_rescue",
+        "disaster_relief",
+        "logistics"
       ],
-      "transfer_log": [
-        {
-          "domain": "logistics",
-          "transfer_type": "known",
-          "general_rules_count": 3,
-          "specific_params_count": 8
-        }
-      ]
+      "total_documents": 15
     }
   },
   "logistics_fr05": {
-    "mission_duration_sec": 0.8762,
+    "mission_duration_sec": 6.6753,
     "total_simulation_steps": 14,
     "task_accuracy": {
       "assigned": 2,
@@ -354,12 +303,12 @@
       "total_failures": 4,
       "total_recoveries": 2,
       "successful_recoveries": 2,
-      "avg_recovery_time_ms": 16.944408416748047,
+      "avg_recovery_time_ms": 17.273545265197754,
       "failure_log": [
         {
           "agent_id": "A_004",
           "step": 1,
-          "timestamp": 1787161498.1025732,
+          "timestamp": 1787163208.233224,
           "remaining_path_length": 0,
           "position_at_failure": [
             "129",
@@ -369,7 +318,7 @@
         {
           "agent_id": "A_006",
           "step": 3,
-          "timestamp": 1787161498.102596,
+          "timestamp": 1787163208.233258,
           "remaining_path_length": 271,
           "position_at_failure": [
             "202",
@@ -379,7 +328,7 @@
         {
           "agent_id": "A_003",
           "step": 5,
-          "timestamp": 1787161498.1155899,
+          "timestamp": 1787163208.247139,
           "remaining_path_length": 231,
           "position_at_failure": [
             "122",
@@ -389,7 +338,7 @@
         {
           "agent_id": "A_005",
           "step": 11,
-          "timestamp": 1787161498.136567,
+          "timestamp": 1787163208.267885,
           "remaining_path_length": 431,
           "position_at_failure": [
             "238",
@@ -403,7 +352,7 @@
           "original_agent": null,
           "reassigned_to": "A_003",
           "path_found": true,
-          "recovery_time_ms": 12.953758239746094,
+          "recovery_time_ms": 13.846158981323242,
           "new_path_length": 233
         },
         {
@@ -411,31 +360,25 @@
           "original_agent": null,
           "reassigned_to": "A_005",
           "path_found": true,
-          "recovery_time_ms": 20.93505859375,
+          "recovery_time_ms": 20.700931549072266,
           "new_path_length": 437
         }
       ]
     },
     "transfer_adaptation": {
       "total_transfers": 1,
-      "known_domain_transfers": 1,
-      "zero_shot_transfers": 0,
+      "known_domain": 1,
+      "zero_shot": 0,
       "registered_domains": [
-        "logistics",
-        "search_and_rescue"
+        "search_and_rescue",
+        "disaster_relief",
+        "logistics"
       ],
-      "transfer_log": [
-        {
-          "domain": "logistics",
-          "transfer_type": "known",
-          "general_rules_count": 3,
-          "specific_params_count": 8
-        }
-      ]
+      "total_documents": 15
     }
   },
   "search_and_rescue_fr00": {
-    "mission_duration_sec": 0.7635,
+    "mission_duration_sec": 7.224,
     "total_simulation_steps": 333,
     "task_accuracy": {
       "assigned": 2,
@@ -459,24 +402,18 @@
     },
     "transfer_adaptation": {
       "total_transfers": 1,
-      "known_domain_transfers": 1,
-      "zero_shot_transfers": 0,
+      "known_domain": 1,
+      "zero_shot": 0,
       "registered_domains": [
-        "logistics",
-        "search_and_rescue"
+        "search_and_rescue",
+        "disaster_relief",
+        "logistics"
       ],
-      "transfer_log": [
-        {
-          "domain": "search_and_rescue",
-          "transfer_type": "known",
-          "general_rules_count": 3,
-          "specific_params_count": 8
-        }
-      ]
+      "total_documents": 15
     }
   },
   "search_and_rescue_fr02": {
-    "mission_duration_sec": 0.8298,
+    "mission_duration_sec": 6.8744,
     "total_simulation_steps": 88,
     "task_accuracy": {
       "assigned": 2,
@@ -494,12 +431,12 @@
       "total_failures": 4,
       "total_recoveries": 1,
       "successful_recoveries": 1,
-      "avg_recovery_time_ms": 0.25081634521484375,
+      "avg_recovery_time_ms": 0.244140625,
       "failure_log": [
         {
           "agent_id": "A_006",
           "step": 5,
-          "timestamp": 1787161499.7395048,
+          "timestamp": 1787163222.339591,
           "remaining_path_length": 0,
           "position_at_failure": [
             "31",
@@ -509,7 +446,7 @@
         {
           "agent_id": "A_005",
           "step": 32,
-          "timestamp": 1787161499.739594,
+          "timestamp": 1787163222.339691,
           "remaining_path_length": 0,
           "position_at_failure": [
             "220",
@@ -519,7 +456,7 @@
         {
           "agent_id": "A_004",
           "step": 44,
-          "timestamp": 1787161499.7396328,
+          "timestamp": 1787163222.33973,
           "remaining_path_length": 227,
           "position_at_failure": [
             "209",
@@ -529,7 +466,7 @@
         {
           "agent_id": "A_003",
           "step": 46,
-          "timestamp": 1787161499.739903,
+          "timestamp": 1787163222.3399968,
           "remaining_path_length": 18,
           "position_at_failure": [
             "44",
@@ -543,31 +480,25 @@
           "original_agent": null,
           "reassigned_to": "A_003",
           "path_found": true,
-          "recovery_time_ms": 0.25081634521484375,
+          "recovery_time_ms": 0.244140625,
           "new_path_length": 20
         }
       ]
     },
     "transfer_adaptation": {
       "total_transfers": 1,
-      "known_domain_transfers": 1,
-      "zero_shot_transfers": 0,
+      "known_domain": 1,
+      "zero_shot": 0,
       "registered_domains": [
-        "logistics",
-        "search_and_rescue"
+        "search_and_rescue",
+        "disaster_relief",
+        "logistics"
       ],
-      "transfer_log": [
-        {
-          "domain": "search_and_rescue",
-          "transfer_type": "known",
-          "general_rules_count": 3,
-          "specific_params_count": 8
-        }
-      ]
+      "total_documents": 15
     }
   },
   "search_and_rescue_fr05": {
-    "mission_duration_sec": 0.9811,
+    "mission_duration_sec": 6.6748,
     "total_simulation_steps": 14,
     "task_accuracy": {
       "assigned": 2,
@@ -585,12 +516,12 @@
       "total_failures": 4,
       "total_recoveries": 2,
       "successful_recoveries": 2,
-      "avg_recovery_time_ms": 57.88838863372803,
+      "avg_recovery_time_ms": 56.043028831481934,
       "failure_log": [
         {
           "agent_id": "A_004",
           "step": 1,
-          "timestamp": 1787161500.5804648,
+          "timestamp": 1787163228.925715,
           "remaining_path_length": 270,
           "position_at_failure": [
             "234",
@@ -600,7 +531,7 @@
         {
           "agent_id": "A_006",
           "step": 3,
-          "timestamp": 1787161500.638816,
+          "timestamp": 1787163228.98402,
           "remaining_path_length": 0,
           "position_at_failure": [
             "31",
@@ -610,7 +541,7 @@
         {
           "agent_id": "A_003",
           "step": 5,
-          "timestamp": 1787161500.6388311,
+          "timestamp": 1787163228.984035,
           "remaining_path_length": 59,
           "position_at_failure": [
             "44",
@@ -620,7 +551,7 @@
         {
           "agent_id": "A_005",
           "step": 11,
-          "timestamp": 1787161500.696358,
+          "timestamp": 1787163229.037926,
           "remaining_path_length": 318,
           "position_at_failure": [
             "214",
@@ -634,7 +565,7 @@
           "original_agent": null,
           "reassigned_to": "A_005",
           "path_found": true,
-          "recovery_time_ms": 58.29787254333496,
+          "recovery_time_ms": 58.24112892150879,
           "new_path_length": 328
         },
         {
@@ -642,27 +573,21 @@
           "original_agent": null,
           "reassigned_to": "A_005",
           "path_found": true,
-          "recovery_time_ms": 57.478904724121094,
+          "recovery_time_ms": 53.84492874145508,
           "new_path_length": 324
         }
       ]
     },
     "transfer_adaptation": {
       "total_transfers": 1,
-      "known_domain_transfers": 1,
-      "zero_shot_transfers": 0,
+      "known_domain": 1,
+      "zero_shot": 0,
       "registered_domains": [
-        "logistics",
-        "search_and_rescue"
+        "search_and_rescue",
+        "disaster_relief",
+        "logistics"
       ],
-      "transfer_log": [
-        {
-          "domain": "search_and_rescue",
-          "transfer_type": "known",
-          "general_rules_count": 3,
-          "specific_params_count": 8
-        }
-      ]
+      "total_documents": 15
     }
   }
 }

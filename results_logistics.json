@@ -1,63 +1,53 @@
 {
-  "mission_duration_sec": 0.0867,
-  "total_simulation_steps": 184,
+  "mission_duration_sec": 5.9716,
+  "total_simulation_steps": 253,
   "task_accuracy": {
     "assigned": 2,
-    "completed": 0,
-    "accuracy_pct": 0.0
+    "completed": 2,
+    "accuracy_pct": 100.0
   },
   "communication_overhead": {
-    "total_llm_calls": 6
+    "total_llm_calls": 5
   },
   "per_agent_steps": {
-    "A_005": 34,
-    "A_006": 120,
-    "A_004": 30
+    "A_005": 62,
+    "A_006": 83,
+    "A_003": 108
   },
   "self_healing": {
-    "total_failures": 4,
+    "total_failures": 3,
     "total_recoveries": 2,
     "successful_recoveries": 2,
-    "avg_recovery_time_ms": 11.594891548156738,
+    "avg_recovery_time_ms": 4.367470741271973,
     "failure_log": [
       {
-        "agent_id": "A_003",
-        "step": 27,
-        "timestamp": 1787161474.517708,
+        "agent_id": "A_004",
+        "step": 15,
+        "timestamp": 1787163159.564852,
         "remaining_path_length": 0,
         "position_at_failure": [
-          252,
-          133
-        ]
-      },
-      {
-        "agent_id": "A_005",
-        "step": 35,
-        "timestamp": 1787161474.517746,
-        "remaining_path_length": 200,
-        "position_at_failure": [
-          81,
+          140,
           128
         ]
       },
       {
-        "agent_id": "A_004",
-        "step": 65,
-        "timestamp": 1787161474.539079,
-        "remaining_path_length": 225,
+        "agent_id": "A_005",
+        "step": 63,
+        "timestamp": 1787163159.5649931,
+        "remaining_path_length": 227,
         "position_at_failure": [
-          101,
-          133
+          81,
+          155
         ]
       },
       {
-        "agent_id": "A_006",
-        "step": 121,
-        "timestamp": 1787161474.5411708,
-        "remaining_path_length": 175,
+        "agent_id": "A_003",
+        "step": 171,
+        "timestamp": 1787163159.573783,
+        "remaining_path_length": 255,
         "position_at_failure": [
-          112,
-          72
+          113,
+          151
         ]
       }
     ],
@@ -65,36 +55,30 @@
       {
         "orphaned_task": "task_2",
         "original_agent": null,
-        "reassigned_to": "A_004",
+        "reassigned_to": "A_003",
         "path_found": true,
-        "recovery_time_ms": 21.205902099609375,
-        "new_path_length": 255
+        "recovery_time_ms": 8.5601806640625,
+        "new_path_length": 363
       },
       {
         "orphaned_task": "task_2",
         "original_agent": null,
         "reassigned_to": "A_006",
         "path_found": true,
-        "recovery_time_ms": 1.9838809967041016,
-        "new_path_length": 231
+        "recovery_time_ms": 0.1747608184814453,
+        "new_path_length": 25
       }
     ]
   },
   "transfer_adaptation": {
     "total_transfers": 1,
-    "known_domain_transfers": 1,
-    "zero_shot_transfers": 0,
+    "known_domain": 1,
+    "zero_shot": 0,
     "registered_domains": [
-      "logistics",
-      "search_and_rescue"
+      "search_and_rescue",
+      "disaster_relief",
+      "logistics"
     ],
-    "transfer_log": [
-      {
-        "domain": "logistics",
-        "transfer_type": "known",
-        "general_rules_count": 3,
-        "specific_params_count": 8
-      }
-    ]
+    "total_documents": 15
   }
 }

@@ -1,101 +1,65 @@
 {
-  "mission_duration_sec": 0.3413,
-  "total_simulation_steps": 50,
+  "mission_duration_sec": 6.6359,
+  "total_simulation_steps": 34,
   "task_accuracy": {
     "assigned": 2,
-    "completed": 1,
-    "accuracy_pct": 50.0
+    "completed": 2,
+    "accuracy_pct": 100.0
   },
   "communication_overhead": {
-    "total_llm_calls": 6
+    "total_llm_calls": 4
   },
   "per_agent_steps": {
-    "A_003": 5,
-    "A_006": 26,
-    "A_004": 19
+    "A_003": 6,
+    "A_004": 28
   },
   "self_healing": {
-    "total_failures": 4,
-    "total_recoveries": 2,
-    "successful_recoveries": 2,
-    "avg_recovery_time_ms": 1.1420249938964844,
+    "total_failures": 2,
+    "total_recoveries": 1,
+    "successful_recoveries": 1,
+    "avg_recovery_time_ms": 0.39196014404296875,
     "failure_log": [
       {
-        "agent_id": "A_003",
-        "step": 6,
-        "timestamp": 1787161495.815507,
-        "remaining_path_length": 1,
+        "agent_id": "A_006",
+        "step": 1,
+        "timestamp": 1787163187.985803,
+        "remaining_path_length": 26,
         "position_at_failure": [
-          "30",
-          "31"
+          "21",
+          "7"
         ]
       },
       {
         "agent_id": "A_005",
-        "step": 14,
-        "timestamp": 1787161495.816631,
+        "step": 27,
+        "timestamp": 1787163187.9862819,
         "remaining_path_length": 0,
         "position_at_failure": [
           "2",
           "22"
         ]
-      },
-      {
-        "agent_id": "A_004",
-        "step": 25,
-        "timestamp": 1787161495.81666,
-        "remaining_path_length": 31,
-        "position_at_failure": [
-          "21",
-          "14"
-        ]
-      },
-      {
-        "agent_id": "A_006",
-        "step": 35,
-        "timestamp": 1787161495.8179,
-        "remaining_path_length": 32,
-        "position_at_failure": [
-          "11",
-          "19"
-        ]
       }
     ],
     "recovery_log": [
       {
-        "orphaned_task": "task_1",
+        "orphaned_task": "task_2",
         "original_agent": null,
         "reassigned_to": "A_004",
         "path_found": true,
-        "recovery_time_ms": 1.071929931640625,
-        "new_path_length": 50
-      },
-      {
-        "orphaned_task": "task_1",
-        "original_agent": null,
-        "reassigned_to": "A_006",
-        "path_found": true,
-        "recovery_time_ms": 1.2121200561523438,
-        "new_path_length": 42
+        "recovery_time_ms": 0.39196014404296875,
+        "new_path_length": 28
       }
     ]
   },
   "transfer_adaptation": {
     "total_transfers": 1,
-    "known_domain_transfers": 0,
-    "zero_shot_transfers": 1,
+    "known_domain": 1,
+    "zero_shot": 0,
     "registered_domains": [
-      "logistics",
       "search_and_rescue",
-      "disaster_relief"
+      "disaster_relief",
+      "logistics"
     ],
-    "transfer_log": [
-      {
-        "domain": "disaster_relief",
-        "transfer_type": "zero_shot",
-        "general_rules_count": 3,
-        "specific_params_count": 8
-      }
-    ]
+    "total_documents": 15
   }
 }

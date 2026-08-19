@@ -88,8 +88,8 @@ class MetricsTracker:
             ta = report["transfer_adaptation"]
             print(f"\n  --- Transfer/Adaptation ---")
             print(f"  Total Transfers:       {ta['total_transfers']}")
-            print(f"  Known Domain:          {ta['known_domain_transfers']}")
-            print(f"  Zero-Shot Transfers:   {ta['zero_shot_transfers']}")
+            print(f"  Known Domain:          {ta['known_domain']}")
+            print(f"  Zero-Shot Transfers:   {ta['zero_shot']}")
             print(f"  Registered Domains:    {ta['registered_domains']}")
 
         print("=" * 60)
