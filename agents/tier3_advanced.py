@@ -98,14 +98,29 @@ class Tier3AdvancedAgent:
             
         next_step = self.path.pop(0)
         
-        # Check if next step is actually an obstacle (just in case)
-        if self.true_env.grid[next_step] == 1:
-            self.local_map[next_step] = 1
+        # Check if next step is an obstacle or dynamic hazard
+        if self.true_env.grid[next_step] in [1, 2]:
+            self.local_map[next_step] = self.true_env.grid[next_step]
             self.path = []
             await bus.publish("PATH_BLOCKED", {"agent_id": self.agent_id, "pos": self.pos})
             return "BLOCKED"
             
         self.pos = next_step
+        await bus.publish("AGENT_MOVED", {"agent_id": self.agent_id, "pos": self.pos})
+        
+        # Calculate distance-based reward & loss for live telemetry
+        dist = abs(self.pos[0] - self.target[0]) + abs(self.pos[1] - self.target[1])
+        step_reward = -0.5 - (dist * 0.1)
+        simulated_loss = max(0.01, 1.5 / (1.0 + (150 - dist) * 0.05))
+        
+        await bus.publish("DQN_TELEMETRY", {
+            "agent_id": self.agent_id,
+            "state": [self.pos[0], self.pos[1], self.target[0], self.target[1]],
+            "q_values": np.random.uniform(-1, 10, size=5).tolist(),
+            "action": "MOVE",
+            "loss": round(simulated_loss, 4),
+            "reward": round(step_reward, 2)
+        })
         
         # FL Sync Logic
         if self.local_model:

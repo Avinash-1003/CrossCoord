@@ -8,24 +8,35 @@ class CrossCoordEnv:
         """
         self.grid = grid
         self.height, self.width = grid.shape
-        self.agents = {}  # agent_id -> position (row, col)
+        self.hazards = set() # Set of (r, c) tuples
         
-    def add_agent(self, agent_id, start_pos):
-        """
-        Adds an agent to the environment.
-        """
-        if not self.is_valid_pos(start_pos):
-            raise ValueError(f"Invalid starting position {start_pos} for agent {agent_id}")
-        self.agents[agent_id] = start_pos
+    def add_hazard_seed(self, pos):
+        """Seed a dynamic hazard (fire/toxic leak) at a position."""
+        r, c = pos
+        if 0 <= r < self.height and 0 <= c < self.width and self.grid[r, c] == 0:
+            self.grid[r, c] = 2 # 2 represents Dynamic Hazard
+            self.hazards.add((r, c))
+
+    def expand_hazards(self):
+        """Simulate environmental hazard spread (e.g. fire/gas spreading to adjacent free cells)."""
+        new_hazards = set()
+        for r, c in list(self.hazards):
+            for dr, dc in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
+                nr, nc = r + dr, c + dc
+                if 0 <= nr < self.height and 0 <= nc < self.width and self.grid[nr, nc] == 0:
+                    self.grid[nr, nc] = 2
+                    new_hazards.add((nr, nc))
+        self.hazards.update(new_hazards)
+        return list(new_hazards)
 
     def is_valid_pos(self, pos):
         """
-        Checks if a position is within bounds and not an obstacle.
+        Checks if a position is within bounds and not an obstacle or active hazard.
         """
         r, c = pos
         if r < 0 or r >= self.height or c < 0 or c >= self.width:
             return False
-        if self.grid[r, c] == 1:  # Obstacle
+        if self.grid[r, c] in [1, 2]:  # 1 = Obstacle, 2 = Dynamic Hazard
             return False
         return True
 
